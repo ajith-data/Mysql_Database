@@ -1,0 +1,10 @@
+This project demonstrates a simple Employee Management System using MySQL. It covers basic SQL operations such as:
+- SELECT
+- INSERT INTO
+- UPDATE
+- DELETE
+
+1.SELECT
+  The SELECT statement is used to retrieve data from one or more tables in a database. It is one of the most commonly used commands in SQL and is essential for reading or querying data.
+ex:
+  select * from employee;
