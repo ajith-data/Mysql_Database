@@ -12,7 +12,7 @@ Example query:
 2.INSERT INTO
   The INSERT INTO statement is used to add new records to a table in a database.
 Example query:
-  nsert into employees values(1, 'Derrick', 'Davis', 'derrick.davis@example.com', 'Sales', 81449.87, '2021-07-28');
+  Insert into employees values(1, 'Derrick', 'Davis', 'derrick.davis@example.com', 'Sales', 81449.87, '2021-07-28');
 
 3.UPDATE
   The UPDATE statement is used to modify the existing records in a table.
