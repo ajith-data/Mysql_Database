@@ -1,0 +1,61 @@
+Filtering in MySQL is used to retrieve only the specific, relevant data from large datasets. It helps improve query performance, clean results, and answer meaningful business questions.
+  
+  - WHERE
+  - AND,OR,NOT
+  - IN
+  - BETWEEN
+  - LIKE
+  - IS NULL,IS NOT NULL
+  - EXISTS
+
+1.WHERE   
+    Use: Filters records based on a condition.
+Example query:
+    SELECT * FROM employees WHERE department = 'Sales';
+
+2.AND 
+    Use: Combines multiple conditions (both must be true)
+Example query:
+    SELECT * FROM employees WHERE department = 'Sales' AND salary > 50000;
+
+  OR
+    Use: Combines multiple conditions (at least one must be true).
+Example query:
+    SELECT * FROM employees WHERE department = 'Sales' OR department = 'HR';
+
+  NOT
+    Use: Excludes a condition.
+Example query:
+    SELECT * FROM employees WHERE NOT department = 'HR';
+
+3.IN
+    Use: Matches any value in a list.
+Example query:
+    SELECT * FROM employees WHERE department IN ('Sales', 'HR', 'IT');
+
+4.BETWEEN
+    Use: Filters values between a range (inclusive).
+Example query:
+    SELECT * FROM employees WHERE salary BETWEEN 40000 AND 60000;
+
+5.LIKE
+    Use: Matches a pattern using wildcards.
+Example query:
+    SELECT * FROM employees WHERE name LIKE 'A%';
+
+6.IS NULL
+    Use: Checks if a field has no value.
+Example query:
+    SELECT * FROM employees WHERE manager_id IS NULL;
+
+7. IS NOT NULL
+    Use: Checks if a field has a value.
+Example query:
+    SELECT * FROM employees WHERE manager_id IS NOT NULL;
+
+8.EXISTS
+    Use: Checks if a subquery returns any rows.
+Example query:
+    SELECT * FROM departments WHERE EXISTS (
+  SELECT * FROM employees WHERE employees.department_id = departments.id
+);
