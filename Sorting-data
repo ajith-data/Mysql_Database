@@ -1,0 +1,22 @@
+--Sorting is used to organize data in a meaningful order, like showing highest salaries first or listing names alphabetically.
+--It helps you quickly analyze trends, find top performers, or locate specific records without scrolling through messy results.
+
+-ORDER BY
+-LIMIT
+-DISTINT
+
+1.ORDER BY 
+  Use:Sorts the result set by one or more columns, either ascending (default) or descending.
+Example query:
+  SELECT * FROM employees
+  ORDER BY salary;
+2. LIMIT
+  Use:Restricts the number of rows returned in the result set.
+Example query:
+  SELECT * FROM employees
+  LIMIT 5;
+
+3. DISTINCT
+  Use:Returns unique values in a column or combination of columns. Removes duplicates.
+Example query:
+  SELECT DISTINCT department FROM employees;
