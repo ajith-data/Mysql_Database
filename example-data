@@ -110,3 +110,16 @@ INSERT INTO employees (id, first_name, last_name, email, department, salary, joi
 (98, 'Larry', 'Chung', 'larry.chung@example.com', 'IT', 87244.97, '2024-05-03'),
 (99, 'Kristen', 'Moss', 'kristen.moss@example.com', 'Finance', 61066.08, '2021-07-21'),
 (100, 'Sarah', 'Holden', 'sarah.holden@example.com', 'Sales', 53475.88, '2017-05-25');
+
+--Create department table
+
+CREATE TABLE department (
+    department_name VARCHAR(50),
+    manager VARCHAR(50)
+);
+INSERT INTO department (department_name, manager) VALUES
+('Sales', 'Mark Smith'),
+('IT', 'Linda Johnson'),
+('HR', 'Paul Adams'),
+('Finance', 'Susan White'),
+('Marketing', 'Robert Gray');
