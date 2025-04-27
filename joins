@@ -1,0 +1,74 @@
+-- INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL JOIN, CROSS JOIN, and SELF JOIN.
+
+1. INNER JOIN
+Meaning:
+  Only matching records from both tables will be returned.
+  If there is no match, the row is not shown.
+
+Example query:
+  SELECT e.first_name, e.last_name, e.department, d.manager
+  FROM employees e
+  INNER JOIN departments d
+  ON e.department = d.department_name;
+
+2. LEFT JOIN (or LEFT OUTER JOIN)
+Meaning:
+  All records from left table (employees), even if there is no match in right table (departments).
+  If no match, right side will be NULL.
+
+Example query:
+  SELECT e.first_name, e.last_name, e.department, d.manager
+  FROM employees e
+  LEFT JOIN departments d
+  ON e.department = d.department_name;
+
+3. RIGHT JOIN (or RIGHT OUTER JOIN)
+Meaning:
+  All records from right table (departments), even if there is no match in left table (employees).
+  If no match, left side will be NULL.
+
+Example query:
+  SELECT e.first_name, e.last_name, e.department, d.manager
+  FROM employees e
+  RIGHT JOIN departments d
+  ON e.department = d.department_name;
+
+4. FULL JOIN (or FULL OUTER JOIN)
+Meaning:
+  All records from both tables, whether there is a match or not.
+  Missing side will have NULL.
+  ❗MySQL doesn't support FULL JOIN directly.
+  We use a trick by combining LEFT JOIN and RIGHT JOIN with UNION.
+
+Example query:
+  SELECT e.first_name, e.last_name, e.department, d.manager
+  FROM employees e
+  LEFT JOIN departments d
+  ON e.department = d.department_name
+  UNION
+  SELECT e.first_name, e.last_name, e.department, d.manager
+  FROM employees e
+  RIGHT JOIN departments d
+  ON e.department = d.department_name;
+
+5. CROSS JOIN
+Meaning:
+  All possible combinations between two tables.
+  No condition is needed.
+
+Example query:
+  SELECT e.first_name, e.last_name, d.department_name
+  FROM employees e
+  CROSS JOIN departments d;
+
+6. SELF JOIN
+Meaning:
+  Joining a table with itself.
+  Useful when you want to compare rows in the same table.
+
+Example query:
+  SELECT A.first_name AS Employee1, B.first_name AS Employee2, A.department
+  FROM employees A
+  INNER JOIN employees B
+  ON A.department = B.department
+  WHERE A.id < B.id;
