@@ -1,0 +1,36 @@
+-- subqueries (SELECT, FROM, WHERE) in SQL is very useful because it allows you to build more powerful, flexible, and dynamic queries.
+
+1.subqueries in select
+2.subqueries in from 
+3.subqueries in where
+
+1.subqueries in select
+  USE:To calculate something for each row without writing separate queries.
+      To fetch related data from other tables inside your output.
+Example query:
+    SELECT 
+    first_name,
+    last_name,
+    salary,
+    (SELECT AVG(salary) FROM employees) AS avg_salary
+    FROM employees;
+    
+2.subqueries in from 
+  USE:To pre-process or group/filter your data before applying more queries.
+      Useful when you want to first summarize then further query that summarized data.
+Example query:
+    SELECT department, AVG(avg_salary) 
+FROM (
+    SELECT department, AVG(salary) AS avg_salary
+    FROM employees
+    GROUP BY department
+    ) AS department_avg
+    GROUP BY department;
+
+3.subqueries in where
+    USE:To filter data based on the results of another query.
+        Makes your query dynamic (based on current data).
+Example query:
+    SELECT first_name, last_name, salary
+    FROM employees
+    WHERE salary > (SELECT AVG(salary) FROM employees);
