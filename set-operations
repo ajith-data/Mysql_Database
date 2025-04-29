@@ -1,0 +1,37 @@
+ Set operations in SQL are used to combine results from two or more SELECT queries. The most common set operations are:
+
+--UNION
+--UNION ALL
+--INTERSECT
+--EXCEPT
+
+1.UNION:
+  Use:Combines results from two SELECT queries and removes duplicates.
+Example query:
+   Let’s get a list of all unique department names from both the employees and department tables.
+    SELECT department FROM employees
+    UNION
+    SELECT department_name FROM department;
+
+2.UNIION ALL:
+  Use: Combines results from two SELECT queries and includes duplicates.
+Example query:
+    SELECT department FROM employees
+    UNION ALL
+    SELECT department_name FROM department;
+
+3.INTERSECT:
+  Use:Returns only the common rows between two SELECT queries.
+Example query:
+    SELECT DISTINCT department FROM employees
+    INTERSECT
+    SELECT department_name FROM department;
+
+4.EXCEPT:
+  Use:Returns rows from the first SELECT that are not present in the second.
+Example query:
+    SELECT DISTINCT department FROM employees
+    EXCEPT
+    SELECT department_name FROM department;
+
+
