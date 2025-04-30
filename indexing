@@ -1,0 +1,48 @@
+-- CREATE INDEX
+-- DROP INDEX
+-- UNIQUE INDEX
+-- FULL-TEXT INDEX
+-- COMPOSITE INDEX
+
+1. CREATE INDEX
+    Creates an index on one or more columns to speed up data retrieval.
+Use Case:
+    Speed up queries filtering employees by department:
+CREATE INDEX idx_department ON employees(department);
+
+Example query:
+  SELECT * FROM employees WHERE department = 'Sales';
+
+2. DROP INDEX
+Removes an index from a table.
+
+Example query:
+  DROP INDEX idx_department ON employees;
+
+3. UNIQUE INDEX
+Ensures all values in the indexed column(s) are unique.
+Use Case:
+  Enforce unique email addresses:
+CREATE UNIQUE INDEX idx_unique_email ON employees(email);
+
+Example query:
+  SELECT * FROM employees WHERE email = 'john.craig@example.com';
+  
+4. FULLTEXT INDEX
+Enables full-text search on textual columns (mainly supported in MySQL, PostgreSQL has tsvector/tsquery).  
+Use Case:
+  Search within names or emails:
+CREATE FULLTEXT INDEX idx_fulltext_name_email ON employees(first_name, last_name, email);
+
+Example query:
+  SELECT * FROM employees
+  WHERE MATCH(first_name, last_name) AGAINST ('Smith');
+
+5. COMPOSITE INDEX (MULTI-COLUMN INDEX)
+Creates an index on multiple columns, helpful when queries filter by more than one column.
+Use Case:
+  Speed up queries filtering by department and salary:
+CREATE INDEX idx_dept_salary ON employees(department, salary);
+
+Example query:
+  SELECT * FROM employees WHERE department = 'IT' AND salary > 70000;
