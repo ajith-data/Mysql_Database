@@ -1,0 +1,61 @@
+-- BEGIN TRANSACTION
+-- COMMINT
+-- ROLLBACK
+-- SAVEPOINT
+-- SET TRANSACTION
+-- ISOLATION LEVEL
+
+1.BEGIN TRANSACTION / START TRANSACTION
+Use:
+  This marks the start of a transaction. All SQL commands after this will be part of the transaction until you COMMIT or ROLLBACK.
+Example query:
+  BEGIN TRANSACTION;
+
+  UPDATE employees
+  SET salary = salary + 5000
+  WHERE department = 'Sales';
+
+2.COMMIT
+Use:
+  This saves all changes made in the current transaction permanently to the database.
+Example query:
+  COMMIT;
+
+3.ROLLBACK
+Use:
+  This undoes all changes made since the transaction began (or since the last SAVEPOINT), restoring the database to its previous state.
+   ROLLBACK;
+Example query:
+  BEGIN TRANSACTION;
+  DELETE FROM employees WHERE department = 'HR';
+  ROLLBACK;  -- This will restore the deleted rows
+
+4.SAVEPOINT
+  Use:Creates a named point within a transaction, so you can partially rollback to that point without rolling back the entire transaction.
+Example query:
+  BEGIN TRANSACTION;
+  UPDATE employees SET salary = salary + 2000 WHERE department = 'Marketing';
+  SAVEPOINT after_marketing_raise;
+  UPDATE employees SET salary = salary + 3000 WHERE department = 'Finance';
+  ROLLBACK TO after_marketing_raise;  -- Only rolls back the Finance update
+  COMMIT;
+
+5.SET TRANSACTION
+  Used to set properties for a transaction, such as the isolation level.
+Example query:
+  SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+--Must be placed before BEGIN TRANSACTION and tells the database how strictly to isolate this transaction from others.
+
+6. ISOLATION LEVELS (used with SET TRANSACTION)
+  Isolation levels control how transactions interact in multi-user environments. Common levels:
+Level	Description
+  READ UNCOMMITTED	
+  READ COMMITTED	
+  REPEATABLE READ	
+  SERIALIZABLE
+
+Example query:
+  SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+  BEGIN TRANSACTION;
+  SELECT * FROM employees WHERE department = 'IT';
+  COMMIT;
