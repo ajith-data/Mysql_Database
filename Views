@@ -1,0 +1,61 @@
+-- CREATE VIEW
+-- DROP VIEW
+-- ALTER VIEW
+-- INSERT INTO VIEW
+-- UPDATE VIEW
+
+1.CREATE VIEW:
+  Use:A VIEW is a virtual table created by a SQL SELECT query. It doesn't store data but provides a way to simplify complex queries or restrict access to specific columns or rows.
+
+Example query:
+  CREATE VIEW sales_employees AS
+  SELECT 
+    id,
+    CONCAT(first_name, ' ', last_name) AS full_name,
+    salary,
+    join_date
+  FROM employees
+  WHERE department = 'Sales';
+
+  select * from sales_employees;
+
+2.DROP VIEW:
+  Use:Removes the view from the database.
+
+Example query:
+  DROP VIEW sales_employees;
+
+3.ALTER VIEW:
+  Use:Updates the definition of an existing view.
+
+Example query:
+  ALTER VIEW sales_employees AS
+  SELECT 
+    id,
+    CONCAT(first_name, ' ', last_name) AS full_name,
+    email,
+    salary,
+    join_date
+  FROM employees
+  WHERE department = 'Sales';
+
+4.INSERT INTO VIEW:
+   Use:You can only insert into updatable views — views based on a single table without aggregations, joins, or GROUP BY.
+Exampel query:
+  First, create a simple view:
+    CREATE VIEW sales_employees AS
+    SELECT id, first_name, last_name, department, salary, join_date
+    FROM employees
+    WHERE department = 'Sales';
+  
+  Now insert into it (make sure values match view structure):
+    INSERT INTO sales_employees (id, first_name, last_name, department, salary, join_date)
+    VALUES (101, 'Ravi', 'Kumar', 'Sales', 65000.00, '2025-05-02');
+
+5.UPDATE VIEW:
+  Use:You can also update data through an updatable view.
+
+Example query:
+  UPDATE sales_employees
+  SET salary = salary + 5000
+  WHERE id = 1;
