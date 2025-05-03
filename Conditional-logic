@@ -1,0 +1,39 @@
+-- CASE WHEN
+-- IFNULL()
+-- COALESCE()
+
+1. CASE WHEN – Conditional logic (like IF-ELSE)
+  Use:CASE WHEN is used to apply conditional logic in a query, similar to if-else statements in programming.
+
+Example query:
+  SELECT 
+    first_name,
+    last_name,
+    salary,
+    CASE 
+        WHEN salary > 80000 THEN 'High'
+        WHEN salary BETWEEN 60000 AND 80000 THEN 'Medium'
+        ELSE 'Low'
+    END AS salary_level
+  FROM employees;
+
+
+ 2. IFNULL(expr1, expr2) – Replace NULL with a default.
+  Use:If expr1 is NULL, returns expr2; otherwise, returns expr1.
+
+Example query:
+  SELECT 
+    id,
+    first_name,
+    IFNULL(email, 'noemail@example.com') AS email_address
+  FROM employees;
+
+3. COALESCE(expr1, expr2, ..., exprN) – Return the first non-null value
+  Use:COALESCE checks each argument in order and returns the first one that is not NULL.
+
+Example query:
+  SELECT 
+    id,
+    first_name,
+    COALESCE(first_name, 'Guest') AS new_name
+  FROM employees;
