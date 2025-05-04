@@ -1,0 +1,156 @@
+-- A trigger is a set of SQL instructions that automatically executes when a specified event occurs on a particular table 
+  (like INSERT, UPDATE, or DELETE).
+
+Example:
+
+CREATE TABLE employees (
+    id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    department VARCHAR(50),
+    salary DECIMAL(10, 2),
+    join_date DATE
+);
+INSERT INTO employees (id, first_name, last_name, email, department, salary, join_date) VALUES
+(1, 'Derrick', 'Davis', 'derrick.davis@example.com', 'Sales', 81449.87, '2021-07-28'),
+(2, 'John', 'Craig', 'john.craig@example.com', 'IT', 63708.12, '2020-01-01'),
+(3, 'Rachel', 'Shaw', 'rachel.shaw@example.com', 'Sales', 68378.87, '2022-06-24'),
+(4, 'Justin', 'Henry', 'justin.henry@example.com', 'Sales', 60014.27, '2019-07-30'),
+(5, 'Brian', 'Hurst', 'brian.hurst@example.com', 'Sales', 62920.16, '2017-11-14'),
+(6, 'Joanne', 'Ballard', 'joanne.ballard@example.com', 'Marketing', 84833.19, '2016-11-03'),
+(7, 'Lauren', 'Becker', 'lauren.becker@example.com', 'Marketing', 70552.78, '2015-12-21'),
+(8, 'John', 'Hughes', 'john.hughes@example.com', 'Sales', 75843.26, '2020-01-02'),
+(9, 'Brittney', 'Coleman', 'brittney.coleman@example.com', 'IT', 71416.12, '2019-12-07'),
+(10, 'Lacey', 'Kennedy', 'lacey.kennedy@example.com', 'Finance', 60329.47, '2022-04-04'),
+(11, 'Isabella', 'Tapia', 'isabella.tapia@example.com', 'Finance', 55996.88, '2015-12-11'),
+(12, 'Daniel', 'Brown', 'daniel.brown@example.com', 'IT', 56234.11, '2024-03-03'),
+(13, 'Amber', 'Michael', 'amber.michael@example.com', 'IT', 61135.1, '2021-06-21'),
+(14, 'Edwin', 'Robinson', 'edwin.robinson@example.com', 'HR', 54112.13, '2018-09-29'),
+(15, 'Anthony', 'Thomas', 'anthony.thomas@example.com', 'Sales', 67657.91, '2020-01-19'),
+(16, 'Andrew', 'Rodriguez', 'andrew.rodriguez@example.com', 'Sales', 55154.63, '2022-06-09'),
+(17, 'Laurie', 'Durham', 'laurie.durham@example.com', 'Sales', 68031.43, '2018-11-19'),
+(18, 'Robert', 'Rosario', 'robert.rosario@example.com', 'Marketing', 87024.7, '2024-10-06'),
+(19, 'Patricia', 'Li', 'patricia.li@example.com', 'HR', 57107.65, '2019-05-19'),
+(20, 'David', 'Davis', 'david.davis@example.com', 'IT', 51956.32, '2025-02-22'),
+(21, 'April', 'Martinez', 'april.martinez@example.com', 'IT', 81122.66, '2018-11-19'),
+(22, 'Michael', 'Meadows', 'michael.meadows@example.com', 'Marketing', 65271.92, '2018-11-13'),
+(23, 'April', 'Wallace', 'april.wallace@example.com', 'Marketing', 74419.8, '2023-10-12'),
+(24, 'Jason', 'Romero', 'jason.romero@example.com', 'Finance', 62075.59, '2019-12-04'),
+(25, 'Dan', 'Nichols', 'dan.nichols@example.com', 'Finance', 67288.62, '2019-08-22'),
+(26, 'Colton', 'White', 'colton.white@example.com', 'Finance', 60548.98, '2021-06-12'),
+(27, 'Adam', 'Cortez', 'adam.cortez@example.com', 'IT', 81573.99, '2019-11-11'),
+(28, 'Michelle', 'Thomas', 'michelle.thomas@example.com', 'IT', 61750.01, '2019-02-05'),
+(29, 'Tamara', 'Rogers', 'tamara.rogers@example.com', 'Sales', 63989.64, '2016-02-29'),
+(30, 'David', 'Carroll', 'david.carroll@example.com', 'Sales', 56930.72, '2022-05-20'),
+(31, 'Ryan', 'Taylor', 'ryan.taylor@example.com', 'Finance', 72295.62, '2017-10-25'),
+(32, 'Jose', 'Norman', 'jose.norman@example.com', 'HR', 68456.13, '2023-10-25'),
+(33, 'Nicholas', 'Reese', 'nicholas.reese@example.com', 'Sales', 60567.9, '2024-08-04'),
+(34, 'Christopher', 'Pitts', 'christopher.pitts@example.com', 'Finance', 66340.6, '2023-03-22'),
+(35, 'Margaret', 'Turner', 'margaret.turner@example.com', 'IT', 52560.89, '2020-02-13'),
+(36, 'Rhonda', 'Torres', 'rhonda.torres@example.com', 'Finance', 63071.9, '2017-05-10'),
+(37, 'David', 'Smith', 'david.smith@example.com', 'Marketing', 60070.17, '2023-05-23'),
+(38, 'Angel', 'Adams', 'angel.adams@example.com', 'Marketing', 81232.24, '2021-11-22'),
+(39, 'Holly', 'Baird', 'holly.baird@example.com', 'Sales', 62855.17, '2020-06-13'),
+(40, 'Natalie', 'Mckee', 'natalie.mckee@example.com', 'Marketing', 84947.98, '2018-05-05'),
+(41, 'Cody', 'Smith', 'cody.smith@example.com', 'IT', 68795.03, '2024-06-23'),
+(42, 'Shane', 'Moore', 'shane.moore@example.com', 'Finance', 64932.87, '2016-10-10'),
+(43, 'Tammy', 'Hill', 'tammy.hill@example.com', 'Finance', 74801.55, '2021-04-28'),
+(44, 'Arthur', 'Scott', 'arthur.scott@example.com', 'Sales', 64800.9, '2021-10-19'),
+(45, 'Mary', 'Anderson', 'mary.anderson@example.com', 'IT', 52647.75, '2017-01-05'),
+(46, 'Eric', 'Williams', 'eric.williams@example.com', 'Finance', 55033.08, '2020-03-04'),
+(47, 'Karen', 'Carlson', 'karen.carlson@example.com', 'IT', 64849.61, '2023-08-05'),
+(48, 'Todd', 'Malone', 'todd.malone@example.com', 'HR', 54515.45, '2018-11-22'),
+(49, 'Denise', 'Moody', 'denise.moody@example.com', 'Sales', 78019.84, '2021-12-14'),
+(50, 'Jamie', 'Wright', 'jamie.wright@example.com', 'HR', 56867.41, '2015-05-21'),
+(51, 'Robin', 'Franklin', 'robin.franklin@example.com', 'HR', 69996.84, '2021-02-17'),
+(52, 'Christine', 'Burnett', 'christine.burnett@example.com', 'Sales', 75027.93, '2017-11-12'),
+(53, 'Kevin', 'Ruiz', 'kevin.ruiz@example.com', 'Finance', 88907.2, '2022-12-04'),
+(54, 'Lawrence', 'Li', 'lawrence.li@example.com', 'Finance', 54330.15, '2024-05-07'),
+(55, 'Anne', 'Jones', 'anne.jones@example.com', 'Finance', 60078.5, '2023-02-26'),
+(56, 'Monica', 'Stevens', 'monica.stevens@example.com', 'Sales', 78248.04, '2022-07-28'),
+(57, 'Charlene', 'Brown', 'charlene.brown@example.com', 'Finance', 76823.66, '2015-07-11'),
+(58, 'Adriana', 'Mills', 'adriana.mills@example.com', 'HR', 55664.9, '2017-10-19'),
+(59, 'Haley', 'Rivera', 'haley.rivera@example.com', 'Sales', 72380.15, '2018-01-17'),
+(60, 'Mario', 'Stephenson', 'mario.stephenson@example.com', 'IT', 89014.66, '2019-09-26'),
+(61, 'Albert', 'Grant', 'albert.grant@example.com', 'Finance', 59938.78, '2018-12-06'),
+(62, 'Christopher', 'Tyler', 'christopher.tyler@example.com', 'Finance', 51363.94, '2017-02-03'),
+(63, 'Sara', 'Brown', 'sara.brown@example.com', 'Finance', 88483.24, '2024-10-12'),
+(64, 'Daniel', 'Norman', 'daniel.norman@example.com', 'Sales', 73660.91, '2024-06-29'),
+(65, 'Andrew', 'Porter', 'andrew.porter@example.com', 'HR', 71957.05, '2022-07-22'),
+(66, 'Brian', 'Harris', 'brian.harris@example.com', 'IT', 51580.05, '2022-04-05'),
+(67, 'Christine', 'Lynn', 'christine.lynn@example.com', 'HR', 89557.13, '2022-12-09'),
+(68, 'Elizabeth', 'Reyes', 'elizabeth.reyes@example.com', 'Finance', 77393.14, '2024-06-14'),
+(69, 'Barry', 'Richards', 'barry.richards@example.com', 'IT', 58110.0, '2015-05-04'),
+(70, 'Elizabeth', 'Smith', 'elizabeth.smith@example.com', 'HR', 80329.77, '2021-01-03'),
+(71, 'Kyle', 'Vincent', 'kyle.vincent@example.com', 'Sales', 78313.94, '2022-08-08'),
+(72, 'Christina', 'Williams', 'christina.williams@example.com', 'Sales', 57623.69, '2016-04-14'),
+(73, 'James', 'Howard', 'james.howard@example.com', 'HR', 62794.21, '2019-04-23'),
+(74, 'Tammie', 'Smith', 'tammie.smith@example.com', 'Sales', 70490.48, '2023-08-16'),
+(75, 'Todd', 'Moore', 'todd.moore@example.com', 'Finance', 87822.94, '2023-10-02'),
+(76, 'Jim', 'Berger', 'jim.berger@example.com', 'HR', 85671.69, '2024-03-29'),
+(77, 'Michelle', 'Stafford', 'michelle.stafford@example.com', 'HR', 85783.62, '2017-02-19'),
+(78, 'Shannon', 'Fowler', 'shannon.fowler@example.com', 'Sales', 66164.65, '2023-04-20'),
+(79, 'Karina', 'Johnson', 'karina.johnson@example.com', 'Marketing', 60844.29, '2024-06-08'),
+(80, 'Teresa', 'Mendoza', 'teresa.mendoza@example.com', 'IT', 67661.64, '2017-09-16'),
+(81, 'Kimberly', 'Higgins', 'kimberly.higgins@example.com', 'Sales', 84522.08, '2024-01-28'),
+(82, 'Joseph', 'Silva', 'joseph.silva@example.com', 'Finance', 57173.82, '2024-05-25'),
+(83, 'Donna', 'Henson', 'donna.henson@example.com', 'IT', 76698.45, '2015-06-27'),
+(84, 'Kellie', 'Cole', 'kellie.cole@example.com', 'Marketing', 66122.41, '2020-02-24'),
+(85, 'Nancy', 'Miller', 'nancy.miller@example.com', 'IT', 62834.55, '2024-05-15'),
+(86, 'Margaret', 'Jackson', 'margaret.jackson@example.com', 'HR', 71078.9, '2017-08-20'),
+(87, 'Thomas', 'Morgan', 'thomas.morgan@example.com', 'HR', 69088.34, '2018-10-02'),
+(88, 'Lee', 'Miranda', 'lee.miranda@example.com', 'Sales', 61413.42, '2022-09-03'),
+(89, 'Andrew', 'Mason', 'andrew.mason@example.com', 'Finance', 51817.5, '2017-03-20'),
+(90, 'Justin', 'Fox', 'justin.fox@example.com', 'IT', 77974.16, '2018-01-24'),
+(91, 'Samantha', 'Atkinson', 'samantha.atkinson@example.com', 'Sales', 75921.94, '2021-01-11'),
+(92, 'Frank', 'Kelley', 'frank.kelley@example.com', 'Marketing', 62659.81, '2017-06-16'),
+(93, 'Jeffrey', 'Johnson', 'jeffrey.johnson@example.com', 'HR', 77971.72, '2018-10-06'),
+(94, 'David', 'Johnson', 'david.johnson@example.com', 'Marketing', 71204.7, '2023-07-21'),
+(95, 'Gabrielle', 'Ruiz', 'gabrielle.ruiz@example.com', 'IT', 66683.27, '2018-06-05'),
+(96, 'Malik', 'Cruz', 'malik.cruz@example.com', 'Finance', 74352.69, '2018-07-26'),
+(97, 'Kimberly', 'Green', 'kimberly.green@example.com', 'HR', 51935.38, '2017-01-12'),
+(98, 'Larry', 'Chung', 'larry.chung@example.com', 'IT', 87244.97, '2024-05-03'),
+(99, 'Kristen', 'Moss', 'kristen.moss@example.com', 'Finance', 61066.08, '2021-07-21'),
+(100, 'Sarah', 'Holden', 'sarah.holden@example.com', 'Sales', 53475.88, '2017-05-25');
+
+CREATE TABLE employee_audit (
+    audit_id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_id INT,
+    action_type VARCHAR(10),
+    action_time DATETIME
+);
+-- The employee_audit table is created to track and log changes made to the employees table — specifically, inserts in this case (and optionally, updates or deletes later).
+
+-- Create trigger (syntax)
+
+  DELIMITER //  
+  CREATE TRIGGER trigger_name
+  {BEFORE | AFTER} {INSERT | UPDATE | DELETE}
+  ON table_name
+  FOR EACH ROW
+  BEGIN
+  -- SQL statements to execute
+  END;
+  //
+  DELIMITER ;
+
+-- After insert 
+  DELIMITER //
+  CREATE TRIGGER after_employee_insert
+  AFTER INSERT ON employees
+  FOR EACH ROW
+  BEGIN
+    INSERT INTO employee_audit (emp_id, action_type, action_time)
+    VALUES (NEW.id, 'INSERT', NOW());
+  END;
+  //
+  DELIMITER ;
+
+  SELECT * FROM employee_audit;
+
+-- Drop trigger (syntax)
+  DROP TRIGGER IF EXISTS after_employee_insert;
+
+  
+  
