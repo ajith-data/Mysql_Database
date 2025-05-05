@@ -1,0 +1,39 @@
+-- WITH CTE AS
+-- RECURSIVE CTE
+-- WITH TEMPORARY CTE
+
+1. Basic CTE (Common Table Expression)
+  A CTE is a temporary result set that you can reference within a SELECT, INSERT, UPDATE, or DELETE query. It improves readability and simplifies complex queries.
+
+Example query:
+  WITH HighEarners AS (
+    SELECT id, first_name, last_name, salary
+    FROM employees
+    WHERE salary > 80000)
+
+  SELECT * FROM HighEarners;
+
+2.Recursive CTE
+  Recursive CTEs are used when you need to work with hierarchical or iterative data. Even though your data isn’t naturally hierarchical (like manager → employee), we can simulate recursion.
+
+Example query:
+  WITH RECURSIVE NumberSeries AS (
+    SELECT 1 AS num
+    UNION ALL
+    SELECT num + 1
+    FROM NumberSeries
+    WHERE num < 10)
+
+  SELECT * FROM NumberSeries;
+
+3.Temporary CTE:
+  CTEs can also be used as temporary tables in JOINs or INSERTs.
+
+Example query:
+  WITH DeptAvgSalary AS (
+    SELECT department, AVG(salary) AS avg_salary
+    FROM employees
+    GROUP BY department)
+  SELECT e.id, e.first_name, e.department, e.salary, d.avg_salary
+  FROM employees e
+  JOIN DeptAvgSalary d ON e.department = d.department;
