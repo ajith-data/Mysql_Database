@@ -1,0 +1,120 @@
+-- ROW_NUMBER()
+-- RANK()
+-- DENSE_RANK()
+-- NTILE()
+-- LEAD()
+-- LAG()
+-- FIRST_VALUE()
+-- LAST_VALUE()
+-- CUME_DIST()
+-- PERCENT_RANK()
+-- SUM() OVER()
+-- AVG() OVER()
+-- PARTITIION BY
+-- ORDER BY
+
+1.ROW_NUMBER()
+  Use:Assigns a unique sequential number to rows within a partition.
+Example query:
+  SELECT 
+    id, first_name, department, salary,
+    ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) AS dept_salary_rank
+  FROM employees;
+
+2.RANK()
+  Use:Similar to ROW_NUMBER(), but gives the same rank to ties. Skips ranks after ties.
+Example query:
+  SELECT 
+    id, first_name, department, salary,
+    RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS salary_rank
+  FROM employees
+  WHERE department = 'IT';
+
+3.DENSE_RANK()
+   Use:Like RANK() but does not skip ranks after ties.
+Example query:
+  SELECT 
+    id, first_name, department, salary,
+    DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS salary_rank
+  FROM employees
+  WHERE department = 'Marketing';
+
+4.NTILE(n)
+   Use:Divides the result set into n equal buckets. Useful for quartiles or deciles
+Example query:
+  SELECT 
+    id, first_name, salary,
+    NTILE(4) OVER (ORDER BY salary) AS salary_quartile
+  FROM employees;
+
+5.LAG()
+  Use:Accesses data from a previous row in the same result set.
+Example query:
+  SELECT 
+    id, first_name, salary, join_date,
+    LAG(salary) OVER (ORDER BY join_date) AS previous_salary
+  FROM employees;
+
+6.LEAD()
+  Use:Accesses data from the next row in the result set.
+Example query:
+  SELECT 
+    id, first_name, salary, join_date,
+    LEAD(salary) OVER (ORDER BY join_date) AS next_salary
+  FROM employees;
+
+7.FIRST_VALUE()
+  Use:Returns the first value in an ordered partition.
+Example query:
+  SELECT 
+    id, first_name, department, join_date, salary,
+    FIRST_VALUE(salary) OVER (PARTITION BY department ORDER BY join_date) AS first_salary
+  FROM employees;
+
+8.LAST_VALUE()
+  Use:Returns the last value in an ordered partition.
+Example query:
+  SELECT 
+    id, first_name, department, join_date, salary,
+    LAST_VALUE(salary) OVER (
+        PARTITION BY department ORDER BY join_date 
+        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+    ) AS last_salary
+  FROM employees;
+
+9. CUME_DIST()
+  Use:Returns the cumulative distribution (percentile) of a value.
+Example query:
+  SELECT 
+    id, first_name, salary,
+    CUME_DIST() OVER (ORDER BY salary) AS cumulative_percent
+  FROM employees;
+
+10. PERCENT_RANK()
+  Use:Relative rank of a row within a partition (0 to 1), like percentile rank.
+Example query:
+  SELECT 
+    id, first_name, salary,
+    PERCENT_RANK() OVER (ORDER BY salary) AS percentile_rank
+  FROM employees;
+
+11.SUM() OVER()
+  Use: Calculates a running or group total without collapsing rows.
+Example query:
+  SELECT 
+    id, first_name, department, salary,
+    SUM(salary) OVER () AS total_salary_all
+  FROM employees;
+
+12.AVG() OVER()
+  Use:Calculates an average across a set of rows without collapsing the result.
+Example query:
+  SELECT 
+    id, first_name, department, salary,
+    AVG(salary) OVER () AS avg_salary_all
+  FROM employees;
+
+
+
+
+
