@@ -1,0 +1,55 @@
+--  NOW()
+-- CURRENT_TIMESTAMP
+-- DATE_ADD()
+-- DATEDIFF()
+-- DATE_FORMAT()
+-- EXTRACT()
+-- TIMESTAMPDIFF()
+
+1.NOW()
+  Use:Returns the current date and time. Equivalent to GETDATE() or CURRENT_TIMESTAMP.
+Example query:
+  SELECT first_name, last_name, 
+    NOW() AS current_time
+  FROM employees;
+
+2.CURRENT_TIMESTAMP
+  Use:Returns the current timestamp (date + time), same as GETDATE() or NOW().
+Example query:
+  SELECT first_name, last_name, 
+    CURRENT_TIMESTAMP AS current_time
+  FROM employees;
+
+3.DATEADD()
+  Use:Adds a specified time interval to a date.
+Example query:
+  SELECT id, first_name, join_date 
+  FROM employees 
+  WHERE join_date > DATE_ADD(CURDATE(), INTERVAL -5 YEAR);
+
+4.DATEDIFF()
+  Use:Returns the difference between two dates.
+Example query:
+  SELECT id, first_name, join_date, TIMESTAMPDIFF(YEAR, join_date, CURDATE()) AS years_worked
+  FROM employees 
+  WHERE TIMESTAMPDIFF(YEAR, join_date, CURDATE()) > 3;
+
+5.DATE_FORMAT()
+  Use:Formats a date value according to a specified format.
+Example query:
+  SELECT id, first_name, DATE_FORMAT(join_date, '%M-%d-%Y') AS formatted_date 
+  FROM employees;
+
+6.EXTRACT()
+  Use:Extracts a specific part (year, month, day, etc.) from a date.
+Example query:
+  SELECT id, first_name, join_date 
+  FROM employees 
+  WHERE EXTRACT(YEAR FROM join_date) = 2023;
+
+7.TIMESTAMPDIFF()
+  Use:Returns the difference between two dates based on the specified unit.
+Example query:
+  SELECT id, first_name, TIMESTAMPDIFF(DAY, join_date, CURDATE()) AS days_worked 
+  FROM employees 
+  WHERE TIMESTAMPDIFF(DAY, join_date, CURDATE()) > 1000;
