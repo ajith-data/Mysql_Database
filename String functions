@@ -1,0 +1,126 @@
+Example data:
+| id | first\_name | last\_name | email                                                     | department |
+| -- | ----------- | ---------- | --------------------------------------------------------- | ---------- |
+| 1  | John        | Doe        | [john.doe@example.com](mailto:john.doe@example.com)       | IT         |
+| 2  | Alice       | Smith      | [alice.smith@example.com](mailto:alice.smith@example.com) | HR         |
+| 3  | Robert      | Brown      | [robert.brown@gmail.com](mailto:robert.brown@gmail.com)   | Sales      |
+
+
+1. UPPER():
+  Use:Converts a string to uppercase.
+Example query:
+  SELECT id, UPPER(first_name) AS upper_first_name FROM employees;
+Output:
+| id | upper\_first\_name |
+| -- | ------------------ |
+| 1  | JOHN               |
+| 2  | ALICE              |
+| 3  | ROBERT             |
+
+
+2. LOWER()
+  Use: Converts a string to lowercase.
+Example query:
+  SELECT id, LOWER(last_name) AS lower_last_name FROM employees;
+Output:
+| id | lower\_last\_name |
+| -- | ----------------- |
+| 1  | doe               |
+| 2  | smith             |
+| 3  | brown             |
+
+
+3.LENGTH()
+  Use: Returns the number of characters in a string.
+Example query:
+  SELECT id, email, LENGTH(email) AS email_length FROM employees;
+Output:
+| id | email                                                     | email\_length |
+| -- | --------------------------------------------------------- | ------------- |
+| 1  | [john.doe@example.com](mailto:john.doe@example.com)       | 20            |
+| 2  | [alice.smith@example.com](mailto:alice.smith@example.com) | 25            |
+| 3  | [robert.brown@gmail.com](mailto:robert.brown@gmail.com)   | 24            |
+
+
+4. SUBSTRING()
+  Use: Extracts part of a string.
+Example query:
+  SELECT id, first_name, SUBSTRING(first_name, 1, 5) AS short_name FROM employees;
+Output:
+| id | first\_name | short\_name |
+| -- | ----------- | ----------- |
+| 1  | John        | John        |
+| 2  | Alice       | Alice       |
+| 3  | Robert      | Rober       |
+
+
+5. CONCAT()
+  Use: Joins two or more strings together.
+Example query:
+  SELECT id, CONCAT(first_name, ' ', last_name) AS full_name FROM employees;
+Output:
+| id | full\_name   |
+| -- | ------------ |
+| 1  | John Doe     |
+| 2  | Alice Smith  |
+| 3  | Robert Brown |
+
+
+6. TRIM()
+  Use: Removes whitespace (or specific characters) from strings.
+Example query:
+  SELECT id, TRIM(first_name) AS trimmed_name FROM employees;
+Output:
+| id | trimmed\_name |
+| -- | ------------- |
+| 1  | John          |
+| 2  | Alice         |
+| 3  | Robert        |
+
+
+7. REPLACE()
+  Use: Replaces occurrences of a substring with another substring.
+Example query:
+  SELECT id, email, REPLACE(email, '.com', '.org') AS updated_email FROM employees;
+Output:
+| id | email                                                     | updated\_email                                            |
+| -- | --------------------------------------------------------- | --------------------------------------------------------- |
+| 1  | [john.doe@example.com](mailto:john.doe@example.com)       | [john.doe@example.org](mailto:john.doe@example.org)       |
+| 2  | [alice.smith@example.com](mailto:alice.smith@example.com) | [alice.smith@example.org](mailto:alice.smith@example.org) |
+| 3  | [robert.brown@gmail.com](mailto:robert.brown@gmail.com)   | [robert.brown@gmail.org](mailto:robert.brown@gmail.org)   |
+
+
+8.POSITION() or LOCATE()
+  Use: Finds the position of a substring in a string.
+Example query:
+  SELECT id, email,locate(email, '@') AS at_position FROM employees;
+Output:
+| id | email                                                     | at\_position |
+| -- | --------------------------------------------------------- | ------------ |
+| 1  | [john.doe@example.com](mailto:john.doe@example.com)       | 9            |
+| 2  | [alice.smith@example.com](mailto:alice.smith@example.com) | 12           |
+| 3  | [robert.brown@gmail.com](mailto:robert.brown@gmail.com)   | 14           |
+
+
+9. LEFT() and RIGHT()
+  Use: Returns the leftmost or rightmost characters from a string.
+Example query:
+  SELECT id, department, LEFT(department, 3) AS dept_short FROM employees;
+Output:
+| id | department | dept\_short |
+| -- | ---------- | ----------- |
+| 1  | IT         | IT          |
+| 2  | HR         | HR          |
+| 3  | Sales      | Sal         |
+
+
+10. REVERSE()
+  Use: Reverses the string characters.
+Example query:
+  SELECT id, first_name, REVERSE(first_name) AS reversed_name FROM employees;
+Output:
+| id | first\_name | reversed\_name |
+| -- | ----------- | -------------- |
+| 1  | John        | nhoJ           |
+| 2  | Alice       | ecilA          |
+| 3  | Robert      | treboR         |
