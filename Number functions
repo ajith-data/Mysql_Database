@@ -1,0 +1,130 @@
+Example data:
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(50),
+    price DECIMAL(10,2),
+    discount DECIMAL(10,2)
+);
+INSERT INTO products (product_id, product_name, price, discount) VALUES
+(1, 'Laptop', 45999.99, 5000),
+(2, 'Mobile', 18999.49, -1000),
+(3, 'Tablet', 22999.75, 0),
+(4, 'Smartwatch', 7499.80, 500);
+
+select * from products;
+Output:
+| product\_id | product\_name | price    | discount |
+| ----------- | ------------- | -------- | -------- |
+| 1           | Laptop        | 45999.99 | 5000     |
+| 2           | Mobile        | 18999.49 | -1000    |
+| 3           | Tablet        | 22999.75 | 0        |
+| 4           | Smartwatch    | 7499.80  | 500      |
+
+1. ABS(x) — Absolute Value
+  Use: Remove negative sign from discount.
+Example query:
+  SELECT product_name, discount, ABS(discount) AS abs_discount FROM products;
+Output:
+| product\_name | discount | abs\_discount |
+| ------------- | -------- | ------------- |
+| Laptop        | 5000     | 5000          |
+| Mobile        | -1000    | 1000          |
+| Tablet        | 0        | 0             |
+| Smartwatch    | 500      | 500           |
+
+2.CEIL(x)
+  Use:Rounds price up to the next whole number.
+Example query:
+  SELECT product_name, price, CEIL(price) AS ceil_price FROM products;
+Output:
+| product\_name | price    | ceil\_price |
+| ------------- | -------- | ----------- |
+| Laptop        | 45999.99 | 46000       |
+| Mobile        | 18999.49 | 19000       |
+| Tablet        | 22999.75 | 23000       |
+| Smartwatch    | 7499.80  | 7500        |
+
+3. FLOOR(x)
+  Use:Rounds price down to the next whole number.
+Example query:
+  SELECT product_name, price, FLOOR(price) AS floor_price FROM products;
+Output:
+| product\_name | price    | floor\_price |
+| ------------- | -------- | ------------ |
+| Laptop        | 45999.99 | 45999        |
+| Mobile        | 18999.49 | 18999        |
+| Tablet        | 22999.75 | 22999        |
+| Smartwatch    | 7499.80  | 7499         |
+
+4. ROUND(x, d)
+  Use:Rounds x to d decimal places.
+Example query:
+  SELECT product_name,price, ROUND(price, 1) AS rounded_price FROM products;
+Output:
+| product\_name | price    | rounded\_price |
+| ------------- | -------- | -------------- |
+| Laptop        | 45999.99 | 46000.0        |
+| Mobile        | 18999.49 | 19000.0        |
+| Tablet        | 22999.75 | 23000.0        |
+| Smartwatch    | 7499.80  | 7499.8         |
+
+5. MOD(x, y) – Modulo (Remainder)
+  Use:Returns the remainder when x is divided by y.
+Example query:
+  SELECT product_name,price, MOD(price, 10000) AS price_mod FROM products;
+Output:
+| product\_name | price    | price\_mod |
+| ------------- | -------- | ---------- |
+| Laptop        | 45999.99 | 5999.99    |
+| Mobile        | 18999.49 | 8999.49    |
+| Tablet        | 22999.75 | 2999.75    |
+| Smartwatch    | 7499.80  | 7499.80    |
+
+6. SQRT()
+  Use:Returns the square root of price.
+Example query:
+  SELECT product_name,price,SQRT(price) AS price_sqrt FROM products;
+Output:
+| product\_name | price    | price\_sqrt |
+| ------------- | -------- | ----------- |
+| Laptop        | 45999.99 | 214.52      |
+| Mobile        | 18999.49 | 137.77      |
+| Tablet        | 22999.75 | 151.65      |
+| Smartwatch    | 7499.80  | 86.60       |
+
+7. LOG()
+  Use:Returns the natural logarithm of price.
+Example query:
+  SELECT product_name,price, LOG(price) AS log_price FROM products;
+Output:
+| product\_name | price    | log\_price |
+| ------------- | -------- | ---------- |
+| Laptop        | 45999.99 | 10.736     |
+| Mobile        | 18999.49 | 9.852      |
+| Tablet        | 22999.75 | 10.044     |
+| Smartwatch    | 7499.80  | 8.922      |
+
+8.POWER(x, y)
+  Use:Returns x raised to the power of y.
+Example query:
+  SELECT product_name,discount, POWER(discount, 2) AS discount_squared FROM products;
+Output:
+| product\_name | discount | discount\_squared |
+| ------------- | -------- | ----------------- |
+| Laptop        | 5000     | 25000000          |
+| Mobile        | -1000    | 1000000           |
+| Tablet        | 0        | 0                 |
+| Smartwatch    | 500      | 250000            |
+
+
+9.TRUNCATE(x, d)
+  Use:Cuts off the number to d decimal places (no rounding).
+Example query:
+  SELECT product_name,price,TRUNCATE(price, 1) AS truncated_price FROM products;
+Output:
+| product\_name | price    | truncated\_price |
+| ------------- | -------- | ---------------- |
+| Laptop        | 45999.99 | 45999.9          |
+| Mobile        | 18999.49 | 18999.4          |
+| Tablet        | 22999.75 | 22999.7          |
+| Smartwatch    | 7499.80  | 7499.8           |
