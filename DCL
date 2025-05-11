@@ -1,0 +1,42 @@
+Example data:
+CREATE DATABASE library;
+USE library;
+CREATE TABLE books (
+    book_id INT PRIMARY KEY,
+    title VARCHAR(100),
+    author VARCHAR(50),
+    available_copies INT
+);
+INSERT INTO books VALUES
+(1, 'The Alchemist', 'Paulo Coelho', 5),
+(2, 'Atomic Habits', 'James Clear', 3);
+
+Select * from books;
+Output:
+| book\_id     | title         | author       | available\_copies     |
+| ------------ | ------------- | -----------  |---------------------  |
+| 1            | The Alchemist | Paulo Coelho | 5                     |
+| 2            | Atomic Habits | James Clear  | 3                     |
+
+-- Create a new user:
+We’ll create a user called librarian_user.
+  CREATE USER 'librarian_user'@'localhost' IDENTIFIED BY 'libpass';
+
+-- Grant SELECT and UPDATE privileges
+  GRANT SELECT, UPDATE ON library.books TO 'librarian_user'@'localhost';
+
+  SELECT * FROM books;        -- allowed
+  UPDATE books SET available_copies = 4 WHERE book_id = 2; -- allowed
+  INSERT INTO books (...)     -- not allowed
+
+-- Revoke the UPDATE privilege
+Suppose the librarian should no longer update data.
+
+  REVOKE UPDATE ON library.books FROM 'librarian_user'@'localhost';
+
+-- Check user privileges
+To check what privileges the user currently has.
+   SHOW GRANTS FOR 'librarian_user'@'localhost';
+
+
+
