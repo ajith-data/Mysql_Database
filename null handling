@@ -1,0 +1,62 @@
+Example data:
+| product\_id | product\_name | price | discount | supplier  |
+| ----------- | ------------- | ----- | -------- | --------- |
+| 1           | Laptop        | 60000 | 5000     | NULL      |
+| 2           | Headphones    | 2000  | NULL     | SoundTech |
+| 3           | Smartphone    | NULL  | 1000     | NULL      |
+| 4           | Mouse         | 500   | NULL     | ClickWare |
+
+
+1.IFNULL(expr1, expr2)
+  Use: Replaces NULL with a specified value.
+Example query:
+SELECT product_name, IFNULL(discount, 0) AS final_discount
+FROM products;
+Output:
+| product\_name | final\_discount |
+| ------------- | --------------- |
+| Laptop        | 5000            |
+| Headphones    | 0               |
+| Smartphone    | 1000            |
+| Mouse         | 0               |
+
+
+2. NULLIF(expr1, expr2)
+  Use: Returns NULL if the two expressions are equal; otherwise, returns the first.
+Example query:
+SELECT product_name, NULLIF(price, discount) AS adjusted_price
+FROM products;
+Output:
+| product\_name | adjusted\_price |
+| ------------- | --------------- |
+| Laptop        | 60000           |
+| Headphones    | 2000            |
+| Smartphone    | NULL            |
+| Mouse         | 500             |
+
+
+3. ISNULL(expr)
+  Use: Returns 1 if the value is NULL, otherwise 0.
+Example query:
+SELECT product_name, ISNULL(supplier) AS is_supplier_missing
+FROM products;
+Output:
+| product\_name | is\_supplier\_missing |
+| ------------- | --------------------- |
+| Laptop        | 1                     |
+| Headphones    | 0                     |
+| Smartphone    | 1                     |
+| Mouse         | 0                     |
+
+4. COALESCE(expr1, expr2, ..., exprN)
+  Use: Returns the first non-NULL value in the list.
+Example query:
+SELECT product_name, COALESCE(supplier, 'Not Available') AS supplier_name
+FROM products;
+Output:
+| product\_name | supplier\_name |
+| ------------- | -------------- |
+| Laptop        | Not Available  |
+| Headphones    | SoundTech      |
+| Smartphone    | Not Available  |
+| Mouse         | ClickWare      |
