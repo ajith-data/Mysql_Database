@@ -1,0 +1,57 @@
+1. PRIMARY KEY:
+  Use: Uniquely identifies each row in a table. Cannot be NULL or duplicate.
+Example table:
+CREATE TABLE Employees (
+    EmpID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Department VARCHAR(30));
+Example query:
+INSERT INTO Employees VALUES (1, 'Jack', 'IT');
+INSERT INTO Employees VALUES (2, 'Rahul', 'HR');
+
+2. FOREIGN KEY:
+  Use: Ensures referential integrity between two tables by linking to a primary key in another table.
+Example table:
+CREATE TABLE Departments (
+    DeptID INT PRIMARY KEY,
+    DeptName VARCHAR(50));
+
+CREATE TABLE Employees (
+    EmpID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    DeptID INT,
+    FOREIGN KEY (DeptID) REFERENCES Departments(DeptID));
+Example query:
+INSERT INTO Departments VALUES (101, 'IT'), (102, 'HR');
+INSERT INTO Employees VALUES (1, 'Jack', 101);
+
+3. UNIQUE:
+  Use: Ensures that all values in a column are different.
+Example table:
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY,
+    Email VARCHAR(100) UNIQUE );
+Example query:
+INSERT INTO Users VALUES (1, 'jack@example.com');
+-- This will fail (duplicate email)
+INSERT INTO Users VALUES (2, 'jack@example.com');
+
+4.NOT NULL:
+  Use:The NOT NULL constraint ensures that a column must have a value. You cannot insert a row where this column is left empty (NULL).
+Example table:
+CREATE TABLE Employees_NotNull (
+    EmpID INT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Department VARCHAR(30) NOT NULL);
+Example query:
+INSERT INTO Employees_NotNull VALUES (1, 'Jack', 'IT');
+
+5.CHECK:
+  Use:The CHECK constraint ensures that column values satisfy a condition (e.g., Age >= 18, Salary >= 10000).
+Example table:
+CREATE TABLE Employees_Check (
+    EmpID INT PRIMARY KEY,
+    Age INT CHECK (Age >= 18),
+    Salary DECIMAL(10, 2) CHECK (Salary >= 10000));
+Example query:
+INSERT INTO Employees_Check VALUES (1, 25, 20000.00);
