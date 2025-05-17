@@ -1,0 +1,50 @@
+Example Table:
+| id | student\_name | subject | marks |
+| -- | ------------- | ------- | ----- |
+| 1  | John          | Math    | 90    |
+| 2  | John          | Science | 85    |
+| 3  | John          | English | 88    |
+| 4  | Mary          | Math    | 95    |
+| 5  | Mary          | Science | 80    |
+| 6  | Mary          | English | 92    |
+
+-- * MySQL does not have built-in PIVOT or UNPIVOT functions, but we can simulate them using CASE statements *.
+1.Pivot:
+  Use: To summarize or transform data from a row-based format to a column-based format for easier reporting, analysis, or visualization.
+Example query:
+SELECT 
+  student_name,
+  SUM(CASE WHEN subject = 'Math' THEN marks ELSE 0 END) AS Math,
+  SUM(CASE WHEN subject = 'Science' THEN marks ELSE 0 END) AS Science,
+  SUM(CASE WHEN subject = 'English' THEN marks ELSE 0 END) AS English
+FROM student_marks
+GROUP BY student_name;
+
+Output:
+| student\_name | Math | Science | English |
+| ------------- | ---- | ------- | ------- |
+| John          | 90   | 85      | 88      |
+| Mary          | 95   | 80      | 92      |
+
+
+2.Unpivot:
+  Use: To normalize column-based data back into rows, especially when preparing it for inserts, joins, or aggregations.
+Example query:
+  SELECT student_name, 'Math' AS subject, Math AS marks
+  FROM student_scores
+  UNION ALL
+  SELECT student_name, 'Science', Science
+  FROM student_scores
+  UNION ALL
+  SELECT student_name, 'English', English
+  FROM student_scores;
+
+Output:
+| student\_name | subject | marks |
+| ------------- | ------- | ----- |
+| John          | Math    | 90    |
+| Mary          | Math    | 95    |
+| John          | Science | 85    |
+| Mary          | Science | 80    |
+| John          | English | 88    |
+| Mary          | English | 92    |
