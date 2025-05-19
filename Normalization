@@ -1,0 +1,72 @@
+1. First Normal Form (1NF):
+  * A table is in 1NF if:
+  * All values in a column are atomic (no multiple values in a single cell).
+  * Each column contains values of the same data type.
+Example – Not in 1NF:
+-- Unnormalized table
++----+----------+-------------------+
+| ID | Name     | Skills            |
++----+----------+-------------------+
+| 1  | Alice    | Java, Python      |
+| 2  | Bob      | SQL, Excel        |
++----+----------+-------------------+
+Output:
+Normalized to 1NF:
+-- Normalized Table
++----+----------+--------+
+| ID | Name     | Skill  |
++----+----------+--------+
+| 1  | Alice    | Java   |
+| 1  | Alice    | Python |
+| 2  | Bob      | SQL    |
+| 2  | Bob      | Excel  |
++----+----------+--------+
+
+2. Second Normal Form (2NF):
+  * A table is in 2NF if:
+  * It is in 1NF.
+  * All non-key attributes are fully functionally dependent on the primary key (no partial dependency).
+Example – Not in 2NF:
+-- Composite Key: (StudentID, CourseID)
++-----------+----------+-------------+--------+
+| StudentID | CourseID | StudentName | Marks  |
++-----------+----------+-------------+--------+
+| 101       | C101     | Alice       | 90     |
+| 101       | C102     | Alice       | 85     |
+Here, StudentName depends only on StudentID, not on the full key.
+Output:
+Normalized to 2NF:
+-- Student Table
++-----------+-------------+
+| StudentID | StudentName |
++-----------+-------------+
+| 101       | Alice       |
+-- Marks Table
++-----------+----------+--------+
+| StudentID | CourseID | Marks  |
++-----------+----------+--------+
+| 101       | C101     | 90     |
+| 101       | C102     | 85     |
+
+3. Third Normal Form (3NF):
+  * A table is in 3NF if:
+  * It is in 2NF.
+  * It has no transitive dependencies (non-key attributes do not depend on other non-key attributes).
+Example – Not in 3NF:
++-----------+-------------+----------+
+| EmpID     | EmpName     | DeptName |
++-----------+-------------+----------+
+| 1         | John        | HR       |
+| 2         | Smith       | IT       |
+If DeptName depends on DeptID, and DeptID is not shown, this is a transitive dependency.
+Normalized to 3NF:
+-- Employee Table
++--------+---------+---------+
+| EmpID  | EmpName | DeptID  |
++--------+---------+---------+
+| 1      | John    | D01     |
+-- Department Table
++--------+-----------+
+| DeptID | DeptName  |
++--------+-----------+
+| D01    | HR        |
